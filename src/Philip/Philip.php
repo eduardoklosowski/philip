@@ -539,6 +539,9 @@ class Philip
         foreach ($responses as $response) {
             $response .= "\r\n";
             fwrite($this->socket, $response);
+            if (explode(' ', $response, 2)[0] == 'PASS') {
+                $response = "PASS ***\r\n";
+            }
             $this->log->debug('<-- ' . $response);
 
             if (isset($this->config['unflood'])) {
